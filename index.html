@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runfolio | Nathaniel Steave Harjanto</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Leaflet CSS for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="run-header">
+        <div class="header-inner">
+            <a href="#" class="logo">RUN<span class="dot">.</span>FOLIO</a>
+            <div class="nav-badge"><i class="fa-solid fa-fire"></i> Endurance & Data</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="run-hero">
+            <p class="hero-subtitle">Nathaniel's Running Journey</p>
+            <h1 class="hero-title">Pacing Through<br>Distance &amp; Data.</h1>
+            <p class="hero-desc">Rekam jejak resmi kompetisi lari dari jarak 5K hingga Half Marathon (21.1K), dilengkapi dengan statistik performa, catatan waktu, dan visualisasi rute.</p>
+        </section>
+
+        <!-- Stats Dashboard -->
+        <section class="stats-dashboard">
+            <div class="stat-card">
+                <i class="fa-solid fa-flag-checkered"></i>
+                <div>
+                    <span class="stat-num">6</span>
+                    <span class="stat-lbl">Official Races</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-bolt"></i>
+                <div>
+                    <span class="stat-num">25:36</span>
+                    <span class="stat-lbl">5K PB (Soekarno Run)</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-medal"></i>
+                <div>
+                    <span class="stat-num">2:19:00</span>
+                    <span class="stat-lbl">HM PB (Mangkunegaran)</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-route"></i>
+                <div>
+                    <span class="stat-num">53.6 KM</span>
+                    <span class="stat-lbl">Total Race Distance</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Race Cards Timeline / Grid -->
+        <section class="races-section">
+            <h2 class="section-heading">Race History</h2>
+            <div class="race-grid" id="race-grid">
+                <!-- Data akan dirender secara dinamis oleh JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="run-footer">
+        <p>Design &amp; Build by Nathaniel Steave Harjanto © 2026</p>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
