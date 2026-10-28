@@ -1,89 +1,274 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Runfolio | Nathaniel Steave Harjanto</title>
-    
-    <!-- Fonts & Icons -->
+    <title>Nathaniel Steave Harjanto — Runner's Log</title>
+    <meta name="description" content="Training log and race history — every kilometre on record.">
+
+    <script>document.documentElement.classList.add('js');</script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
-    <!-- Leaflet CSS for Maps -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header / Navbar -->
-    <header class="run-header">
-        <div class="header-inner">
-            <a href="#" class="logo">RUN<span class="dot">.</span>FOLIO</a>
-            <div class="nav-badge"><i class="fa-solid fa-fire"></i> Endurance & Data</div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a href="#" class="brand">nathaniel<span class="dot">.</span></a>
+            <nav class="nav" aria-label="Primary">
+                <a href="#training">Training</a>
+                <a href="#races">Races</a>
+                <a href="#route">Route</a>
+            </nav>
+            <a href="#contact" class="btn btn-sm">Say hi</a>
         </div>
     </header>
 
-    <main class="container">
-        <!-- Hero Section -->
-        <section class="run-hero">
-            <p class="hero-subtitle">Nathaniel's Running Journey</p>
-            <h1 class="hero-title">Pacing Through<br>Distance &amp; Data.</h1>
-            <p class="hero-desc">Rekam jejak resmi kompetisi lari dari jarak 5K hingga Half Marathon (21.1K), dilengkapi dengan statistik performa, catatan waktu, dan visualisasi rute.</p>
+    <main>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow reveal" style="--d:0ms">Runner's log — Solo, ID</p>
+                    <h1 class="hero-title reveal" style="--d:80ms">
+                        Every run,<br><em>on record.</em>
+                    </h1>
+                    <p class="lede reveal" style="--d:160ms">
+                        A running record by Nathaniel Steave Harjanto — training runs, races, and everything in between.
+                    </p>
+                    <div class="hero-actions reveal" style="--d:240ms">
+                        <a href="#training" class="btn">See the data <span aria-hidden="true">↓</span></a>
+                        <a href="#" class="ghost-link">Strava profile <span aria-hidden="true">↗</span></a>
+                    </div>
+                </div>
+
+                <div class="pb-wrap reveal" id="pb-wrap" style="--d:180ms">
+                    <aside class="pb-card" data-tilt>
+                        <div class="pb-top">
+                            <span id="pb-label">Half Marathon · PB</span>
+                            <span class="pb-flag" id="pb-flag">21.1 KM</span>
+                        </div>
+                        <div class="pb-time" id="pb-time">—</div>
+                        <div class="pb-meta" id="pb-meta">Belum ada data</div>
+                        <div class="pb-split" id="pb-split" aria-hidden="true"></div>
+                        <div class="pb-split-label" id="pb-split-label">Splits · km 1–21</div>
+                        <div class="pb-row" id="pb-row">
+                            <div>
+                                <span class="pb-row-lbl">5K PB</span>
+                                <span class="pb-row-val" id="pb-5k-val">—</span>
+                            </div>
+                            <div>
+                                <span class="pb-row-lbl">10K PB</span>
+                                <span class="pb-row-val" id="pb-10k-val">—</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
         </section>
 
-        <!-- Stats Dashboard -->
-        <section class="stats-dashboard">
-            <div class="stat-card">
-                <i class="fa-solid fa-flag-checkered"></i>
-                <div>
-                    <span class="stat-num">6</span>
-                    <span class="stat-lbl">Official Races</span>
+        <!-- TICKER -->
+        <div class="ticker" aria-hidden="true">
+            <div class="ticker-track" id="ticker-track"></div>
+        </div>
+
+        <!-- STATS BAND -->
+        <section class="stats-band" aria-label="Career stats">
+            <div class="wrap stats reveal">
+                <div class="stat">
+                    <span class="stat-num" id="stat-runs">—</span>
+                    <span class="stat-lbl">Total runs</span>
                 </div>
-            </div>
-            <div class="stat-card">
-                <i class="fa-solid fa-bolt"></i>
-                <div>
-                    <span class="stat-num">25:36</span>
-                    <span class="stat-lbl">5K PB (Soekarno Run)</span>
+                <div class="stat">
+                    <span class="stat-num" id="stat-km">—</span>
+                    <span class="stat-lbl">Total distance</span>
                 </div>
-            </div>
-            <div class="stat-card">
-                <i class="fa-solid fa-medal"></i>
-                <div>
-                    <span class="stat-num">2:19:00</span>
-                    <span class="stat-lbl">HM PB (Mangkunegaran)</span>
+                <div class="stat">
+                    <span class="stat-num" id="stat-pace">—</span>
+                    <span class="stat-lbl">Avg pace</span>
                 </div>
-            </div>
-            <div class="stat-card">
-                <i class="fa-solid fa-route"></i>
-                <div>
-                    <span class="stat-num">53.6 KM</span>
-                    <span class="stat-lbl">Total Race Distance</span>
+                <div class="stat">
+                    <span class="stat-num" id="stat-races">—</span>
+                    <span class="stat-lbl">Official races</span>
                 </div>
             </div>
         </section>
 
-        <!-- Race Cards Timeline / Grid -->
-        <section class="races-section">
-            <h2 class="section-heading">Race History</h2>
-            <div class="race-grid" id="race-grid">
-                <!-- Data akan dirender secara dinamis oleh JavaScript -->
+        <!-- TRAINING -->
+        <section id="training" class="section">
+            <div class="wrap">
+                <header class="section-head reveal">
+                    <div>
+                        <span class="section-eyebrow">01 — Training</span>
+                        <h2 class="section-title">The work behind the races.</h2>
+                    </div>
+                    <p class="section-note">Every run, every kilometre — logged and totalled.</p>
+                </header>
+
+                <!-- Volume chart -->
+                <div class="chart-block reveal">
+                    <div class="chart-head">
+                        <h3 class="chart-title">Monthly volume</h3>
+                        <span class="chart-note" id="chart-range">Last 12 months</span>
+                    </div>
+                    <div class="volume-chart" id="volume-chart"></div>
+                </div>
+
+                <!-- Heatmap -->
+                <div class="chart-block reveal">
+                    <div class="chart-head">
+                        <h3 class="chart-title">Daily activity</h3>
+                        <span class="chart-note" id="heatmap-note">—</span>
+                    </div>
+                    <div class="heatmap-scroll">
+                        <div class="heatmap-inner">
+                            <div class="heatmap-months" id="heatmap-months"></div>
+                            <div class="heatmap-body">
+                                <div class="heatmap-days" id="heatmap-days"></div>
+                                <div class="heatmap-grid" id="heatmap-grid"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heatmap-legend">
+                        <span>Less</span>
+                        <span class="heatmap-swatch" data-level="0"></span>
+                        <span class="heatmap-swatch" data-level="1"></span>
+                        <span class="heatmap-swatch" data-level="2"></span>
+                        <span class="heatmap-swatch" data-level="3"></span>
+                        <span class="heatmap-swatch" data-level="4"></span>
+                        <span>More</span>
+                    </div>
+                </div>
+
+                <!-- Insights -->
+                <div class="insights-strip reveal" id="insights-strip">
+                    <div class="insight">
+                        <span class="insight-lbl">Total time</span>
+                        <span class="insight-val" id="insight-time">—</span>
+                    </div>
+                    <div class="insight">
+                        <span class="insight-lbl">Avg per week</span>
+                        <span class="insight-val" id="insight-avg-week">—</span>
+                    </div>
+                    <div class="insight">
+                        <span class="insight-lbl">Best week</span>
+                        <span class="insight-val" id="insight-best-week">—</span>
+                        <span class="insight-sub" id="insight-best-week-date"></span>
+                    </div>
+                    <div class="insight">
+                        <span class="insight-lbl">Most active month</span>
+                        <span class="insight-val" id="insight-best-month">—</span>
+                        <span class="insight-sub" id="insight-best-month-label"></span>
+                    </div>
+                </div>
+
+                <!-- Recent runs -->
+                <div class="recent-runs reveal">
+                    <div class="mini-head-row">
+                        <h3 class="mini-head">Recent runs</h3>
+                        <span class="mini-head-note">10 terakhir</span>
+                    </div>
+                    <div id="recent-runs-list"></div>
+                </div>
             </div>
         </section>
+
+        <!-- RACES -->
+        <section id="races" class="section">
+            <div class="wrap">
+                <header class="section-head reveal">
+                    <div>
+                        <span class="section-eyebrow">02 — Races</span>
+                        <h2 class="section-title">Every race, on record.</h2>
+                    </div>
+                    <p class="section-note">Hanya race resmi. Training runs ada di section sebelumnya.</p>
+                </header>
+
+                <ol class="race-list" id="race-list"></ol>
+            </div>
+        </section>
+
+        <!-- ROUTE -->
+        <section id="route" class="section">
+            <div class="wrap">
+                <header class="section-head reveal">
+                    <div>
+                        <span class="section-eyebrow">03 — Route</span>
+                        <h2 class="section-title">The long way round.</h2>
+                    </div>
+                    <p class="section-note">Rute dari aktivitas terpanjang di log.</p>
+                </header>
+
+                <div class="route-grid">
+                    <div class="route-map reveal">
+                        <div id="map" role="img" aria-label="Route map"></div>
+                    </div>
+
+                    <dl class="route-facts reveal" style="--d:120ms" id="route-facts">
+                        <div class="fact"><dt>Distance</dt><dd id="route-distance">—</dd></div>
+                        <div class="fact"><dt>Finish</dt><dd id="route-time">—</dd></div>
+                        <div class="fact"><dt>Avg pace</dt><dd id="route-pace">—</dd></div>
+                        <div class="fact"><dt>Date</dt><dd id="route-date">—</dd></div>
+                        <div class="fact"><dt>Name</dt><dd id="route-name">—</dd></div>
+                    </dl>
+                </div>
+
+                <!-- Elevation profile -->
+                <div class="chart-block elevation-block reveal" id="elevation-block">
+                    <div class="chart-head">
+                        <h3 class="chart-title">Elevation profile</h3>
+                        <span class="chart-note" id="elevation-note">—</span>
+                    </div>
+                    <div class="elevation-stats">
+                        <div class="elev-stat">
+                            <span class="elev-lbl">Min</span>
+                            <span class="elev-val" id="elev-min">—</span>
+                        </div>
+                        <div class="elev-stat">
+                            <span class="elev-lbl">Max</span>
+                            <span class="elev-val" id="elev-max">—</span>
+                        </div>
+                        <div class="elev-stat">
+                            <span class="elev-lbl">Gain</span>
+                            <span class="elev-val" id="elev-gain">—</span>
+                        </div>
+                        <div class="elev-stat">
+                            <span class="elev-lbl">Distance</span>
+                            <span class="elev-val" id="elev-distance">—</span>
+                        </div>
+                    </div>
+                    <div class="elevation-chart" id="elevation-chart"></div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="run-footer">
-        <p>Design &amp; Build by Nathaniel Steave Harjanto © 2026</p>
+    <!-- FOOTER -->
+    <footer id="contact" class="site-footer">
+        <div class="wrap footer-inner">
+            <h2 class="footer-title reveal">Let's run<br>together.</h2>
+            <div class="footer-meta">
+                <span>© 2026 Nathaniel Steave Harjanto</span>
+                <div class="footer-links">
+                    <a href="#">Strava ↗</a>
+                    <a href="#">Instagram ↗</a>
+                    <a href="#">Email ↗</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Custom JS -->
     <script src="script.js"></script>
 </body>
 </html>

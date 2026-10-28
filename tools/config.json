@@ -1,0 +1,52 @@
+{
+  "activities": {
+    "12345678901": {
+      "name": "Amaze Glow Run The Park",
+      "location": "Solo",
+      "category": "5K",
+      "badge": "Night run",
+      "is_race": true,
+      "description": "My first official 5K. Went out too fast, faded on the last kilometre, and somehow still signed up for another one the same week."
+    },
+    "12345678902": {
+      "name": "Mangkunegaran Run",
+      "location": "Pura Mangkunegaran, Solo",
+      "category": "5K",
+      "badge": "Sub-30",
+      "is_race": true,
+      "description": "The sub-30 finally happened here. Pacing was boring and disciplined — exactly what it needed to be."
+    },
+    "12345678903": {
+      "name": "Soekarno Run SOC",
+      "location": "Solo",
+      "category": "5K",
+      "badge": "Personal best",
+      "is_race": true,
+      "description": "Everything clicked. Legs felt light from the first kilometre, and 25:36 still feels a little unreal."
+    },
+    "12345678904": {
+      "name": "Solo Run Fest",
+      "location": "Solo",
+      "category": "10K",
+      "badge": "Sub-1 hour",
+      "is_race": true,
+      "description": "First 10K, first time dealing with fuel and heat over an hour. Finished just under the hour, which was the whole goal."
+    },
+    "12345678905": {
+      "name": "Gapuro to Gapuro",
+      "location": "Solo & around",
+      "category": "17K",
+      "badge": "Long endurance",
+      "is_race": true,
+      "description": "Not a fast one. A long, honest run that taught me more about pacing than any of the shorter races did."
+    },
+    "12345678906": {
+      "name": "Mangkunegaran Run",
+      "location": "Pura Mangkunegaran, Solo",
+      "category": "HM 21.1K",
+      "badge": "Major milestone",
+      "is_race": true,
+      "description": "The one I trained a whole block for. Even splits, no wall, and a finish I'd been picturing for months."
+    }
+  }
+}
